@@ -1,0 +1,63 @@
+const fs = require('fs');
+const path = require('path');
+const vm = require('vm');
+const assert = require('assert/strict');
+const source = fs.readFileSync(path.join(__dirname, '../static/src/services/record_history_service.js'), 'utf8').replace(/^import .*;$/gm, '').replace(/export /g, '');
+const storage = new Map();
+let blocked = false;
+let listener;
+let warnings = 0;
+const context = vm.createContext({
+ reactive: value => value,
+ browser: { localStorage: {getItem: key => storage.get(key) ?? null, setItem: (key, value) => { if(blocked) throw Error('quota'); storage.set(key,value); }}, addEventListener: (_, cb) => {listener = cb;} },
+ _t: value => value,
+ registry: {category: () => ({add(){}})}, user: {userId: 1}, session: {db: 'test_db'},
+});
+vm.runInContext(source + ';globalThis.service = recordHistoryService;', context);
+const start = () => context.service.start({}, {notification:{add(){warnings++;}}});
+let service = start();
+const record = (id, model = 'res.partner', name = 'Record ' + id) => ({resModel:model,resId:id,displayName:name});
+assert.equal(service.addRecent(record(0)), false);
+assert.equal(service.addRecent(record(true)), false);
+assert.equal(service.addRecent(record(1,'bad model')), false);
+for(let id=1; id<=12; id++) service.addRecent(record(id));
+assert.equal(service.getRecent().length,10);
+assert.equal(service.getRecent()[0].resId,12);
+assert.equal(service.getRecent()[9].resId,3);
+service.addRecent(record(5));
+assert.equal(service.getRecent()[0].resId,5);
+assert.equal(service.getRecent().length,10);
+service.addRecent(record(5,'sale.order'));
+assert.equal(service.getRecent().filter(r=>r.resId===5).length,2);
+assert.equal(service.togglePin(record(5)),true);
+assert.equal(service.togglePin(record(5)),false);
+service.togglePin(record(5));
+service.addRecent(record(5,'res.partner','Renamed'));
+assert.equal(service.getPinned()[0].displayName,'Renamed');
+assert.equal(service.removeRecent(record(5)),true);
+assert.equal(service.getPinned()[0].displayName,'Renamed');
+assert.equal(start().getRecent().some(r=>r.resModel==='res.partner' && r.resId===5),false);
+assert.equal(service.removeRecent(record(5)),false);
+service.addRecent(record(5,'res.partner','Renamed'));
+assert.equal(service.removePinned(record(5)),true);
+assert.equal(service.getRecent()[0].resId,5);
+assert.equal(start().getPinned().length,0);
+assert.equal(service.removePinned(record(5)),false);
+assert.equal(service.removeRecent(record(-1)),false);
+assert.equal(service.removePinned(record(-1)),false);
+service.togglePin(record(5,'res.partner','Renamed'));
+const copy = service.getPinned(); copy[0].displayName='Wrong';
+assert.equal(service.getPinned()[0].displayName,'Renamed');
+service = start(); assert.equal(service.getPinned()[0].displayName,'Renamed');
+context.user.userId=2; service=start(); assert.equal(service.getRecent().length,0);
+service.addRecent(record(99));
+context.user.userId=1; service=start(); assert.equal(service.getRecent()[0].resId,5);
+context.session.db='other_db'; service=start(); assert.equal(service.getRecent().length,0);
+context.session.db='test_db'; service=start();
+blocked=true; service.addRecent(record(70)); service.togglePin(record(70));
+assert.equal(service.getRecent()[0].resId,70); assert.equal(warnings,1); blocked=false;
+storage.set('odoo_recent_records','not JSON'); service=start(); assert.equal(service.getRecent().length,0);
+storage.set('odoo_recent_records',JSON.stringify({version:1,scopes:{'["test_db",1]':[record(9),record(9),record(-1)]}}));
+listener({key:'odoo_recent_records'}); assert.equal(service.getRecent().length,1);
+listener({key:null});
+console.log('PASS: validation, FIFO eviction, deduplication, model identity, pin/unpin, label refresh, snapshots, persistence, user/database isolation, quota fallback, corrupt JSON and cross-tab synchronization.');
