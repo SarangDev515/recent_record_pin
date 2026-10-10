@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quick Record Pin &amp; History Sidebar — Odoo 19</title>
+</head>
+<body style="margin:0;background:#f7f8fc;color:#253047;font-family:Arial,Helvetica,sans-serif;line-height:1.65;">
+<div class="container" style="max-width:1080px;margin:0 auto;padding:24px;">
+    <section class="oe_container" style="padding:36px 28px;background:#27234d;color:#ffffff;border-radius:16px;margin-bottom:24px;">
+        <div class="row align-items-center">
+            <div class="col-md-8" style="padding:12px;">
+                <p style="margin:0 0 12px;color:#d4c7ff;font-weight:bold;letter-spacing:1px;">ODOO 19.0 &nbsp; | &nbsp; PRODUCTIVITY</p>
+                <h1 style="font-size:36px;line-height:1.2;margin:0 0 18px;color:#ffffff;">Quick Record Pin &amp; History Sidebar</h1>
+                <p style="font-size:18px;margin:0 0 18px;">Your important records, one click away.</p>
+                <p style="margin:0;color:#e1dff1;">Return to your ten most recently viewed forms and pin the records you use most often. Access everything from a compact thumb-tack menu in the Odoo top navigation bar.</p>
+            </div>
+            <div class="col-md-4" style="padding:12px;text-align:center;">
+                <img src="icon.png" alt="Quick Record Pin and History Sidebar module icon" class="img-fluid" style="width:220px;max-width:100%;height:auto;border-radius:18px;">
+            </div>
+        </div>
+    </section>
+
+    <section class="oe_container" style="background:#ffffff;border:1px solid #e5e7ef;border-radius:14px;padding:28px;margin-bottom:24px;">
+        <h2 style="margin-top:0;color:#4b3589;">What the module does</h2>
+        <div class="row">
+            <div class="col-md-6" style="padding:12px;">
+                <h3 style="font-size:19px;">Automatic recent history</h3>
+                <p>Opening a saved record form adds it to <strong>Recently Viewed</strong>. The newest record appears first. The list holds up to ten unique records; when full, the oldest entry is removed. Revisiting a record moves it to the top instead of creating a duplicate.</p>
+            </div>
+            <div class="col-md-6" style="padding:12px;">
+                <h3 style="font-size:19px;">Independent pinned shortcuts</h3>
+                <p>Pin important entries from the recent list. They appear in <strong>Pinned Records</strong> and remain there even when they fall out of recent history. When a pinned record is revisited, its saved display name is refreshed.</p>
+            </div>
+            <div class="col-md-6" style="padding:12px;">
+                <h3 style="font-size:19px;">Native form navigation</h3>
+                <p>Click a record name to open that exact record in a form using Odoo's native action service. Normal access checks and unsaved-change navigation guards continue to apply.</p>
+            </div>
+            <div class="col-md-6" style="padding:12px;">
+                <h3 style="font-size:19px;">Simple, polished controls</h3>
+                <p>A larger 20px navbar pin, a pinned-count badge, subtle hover states, keyboard-focus outlines, truncated long labels and compact action buttons keep the dropdown easy to scan. Motion is reduced when the browser requests reduced animation.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="oe_container" style="background:#ffffff;border:1px solid #e5e7ef;border-radius:14px;padding:28px;margin-bottom:24px;">
+        <h2 style="margin-top:0;color:#4b3589;">How to use it</h2>
+        <ol style="padding-left:24px;">
+            <li style="margin-bottom:12px;"><strong>Open a saved record.</strong> Visit a contact, sales order, invoice or another form using the standard Odoo form controller. The record is added automatically.</li>
+            <li style="margin-bottom:12px;"><strong>Open the thumb-tack menu.</strong> Click the pin icon in the top navbar to see Pinned Records and Recently Viewed.</li>
+            <li style="margin-bottom:12px;"><strong>Pin an important entry.</strong> Click its pin button in Recently Viewed. The navbar badge reflects the total number of pins.</li>
+            <li style="margin-bottom:12px;"><strong>Return instantly.</strong> Click any record name to open its form. Pinning and removing shortcuts keep the menu open; selecting a record closes it.</li>
+            <li><strong>Keep your shortcuts tidy.</strong> Use a trash button to remove an entry from its section. Use the pin button again in Recently Viewed to unpin an already pinned record.</li>
+        </ol>
+        <div style="background:#f0ecfa;border-left:4px solid #7956bd;border-radius:6px;padding:16px;">
+            <strong>Example workflow:</strong> Open a customer, then a quotation, then an invoice. Pin the customer and quotation for regular access. Continue working: the recent list changes, while your pins remain available until you remove them.
+        </div>
+    </section>
+
+    <section class="oe_container" style="background:#ffffff;border:1px solid #e5e7ef;border-radius:14px;padding:28px;margin-bottom:24px;">
+        <h2 style="margin-top:0;color:#4b3589;">Remove shortcuts safely</h2>
+        <div style="overflow-x:auto;">
+            <table class="table table-bordered" style="width:100%;border-collapse:collapse;text-align:left;">
+                <thead><tr style="background:#f0ecfa;"><th style="padding:12px;border:1px solid #e5e7ef;">Control</th><th style="padding:12px;border:1px solid #e5e7ef;">Result</th></tr></thead>
+                <tbody>
+                    <tr><td style="padding:12px;border:1px solid #e5e7ef;">Trash in Pinned Records</td><td style="padding:12px;border:1px solid #e5e7ef;">Removes the pin only. Any existing recent-history entry stays.</td></tr>
+                    <tr><td style="padding:12px;border:1px solid #e5e7ef;">Trash in Recently Viewed</td><td style="padding:12px;border:1px solid #e5e7ef;">Removes the recent entry only. Any existing pin stays.</td></tr>
+                    <tr><td style="padding:12px;border:1px solid #e5e7ef;">Pin button on a pinned recent entry</td><td style="padding:12px;border:1px solid #e5e7ef;">Unpins the record without removing its recent entry.</td></tr>
+                    <tr><td style="padding:12px;border:1px solid #e5e7ef;">Reopen a removed recent entry</td><td style="padding:12px;border:1px solid #e5e7ef;">Adds the record back to recent history automatically.</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-bottom:0;"><strong>Removing a shortcut never deletes an actual Odoo record.</strong> Removal is immediate and does not require a confirmation dialog.</p>
+    </section>
+
+    <section class="oe_container" style="background:#ffffff;border:1px solid #e5e7ef;border-radius:14px;padding:28px;margin-bottom:24px;">
+        <h2 style="margin-top:0;color:#4b3589;">Tracking behavior</h2>
+        <ul style="padding-left:22px;">
+            <li>Tracks successfully rendered, saved form records rather than every requested action.</li>
+            <li>Handles record changes through the form pager and forms opened in dialogs.</li>
+            <li>Ignores new, unsaved records; tracking starts after the record receives a valid saved ID.</li>
+            <li>Identifies entries by model and record ID, so equal IDs in different models remain separate.</li>
+            <li>Uses the loaded display name without an extra record-name request; missing names fall back to <code>model #ID</code>.</li>
+            <li>List and kanban browsing alone does not add entries. Custom interfaces that do not use the standard form controller may not be tracked.</li>
+        </ul>
+    </section>
+
+    <section class="oe_container" style="background:#ffffff;border:1px solid #e5e7ef;border-radius:14px;padding:28px;margin-bottom:24px;">
+        <h2 style="margin-top:0;color:#4b3589;">Installation and updates</h2>
+        <ol style="padding-left:24px;">
+            <li>Place the <code>recent_record_pin</code> folder in an Odoo addons directory.</li>
+            <li>Ensure that directory is included in the server's <code>addons_path</code>, then restart Odoo.</li>
+            <li>Enable developer mode and select <strong>Update Apps List</strong>.</li>
+            <li>Remove the default Apps filter if necessary. Search for <strong>Quick Record Pin &amp; History Sidebar</strong> and install it.</li>
+            <li>Refresh the web client and look for the thumb-tack icon in the top navbar.</li>
+        </ol>
+        <p><strong>After changing module files:</strong> upgrade the module and hard-refresh the browser. Developer asset mode (<code>?debug=assets</code>) can help diagnose cached assets.</p>
+        <p style="margin-bottom:0;"><strong>Technical details:</strong> Odoo 19.0 &middot; Version 19.0.1.0.0 &middot; Dependencies: <code>web</code>, <code>mail</code> &middot; License: LGPL-3 &middot; OWL components and web client services &middot; No new backend tables or configuration forms.</p>
+    </section>
+
+    <section class="oe_container" style="background:#ffffff;border:1px solid #e5e7ef;border-radius:14px;padding:28px;margin-bottom:24px;">
+        <h2 style="margin-top:0;color:#4b3589;">Persistence, privacy and limitations</h2>
+        <p>Shortcuts are stored in browser <code>localStorage</code>, with separate buckets for each Odoo database and user. The two keys are <code>odoo_recent_records</code> and <code>odoo_pinned_records</code>. Each entry contains only a model name, record ID and display name.</p>
+        <ul style="padding-left:22px;">
+            <li><strong>Browser-local, not server-synced:</strong> history and pins normally survive refresh in the same browser profile and site, but do not automatically follow you to another browser or device.</li>
+            <li><strong>Not encrypted:</strong> anyone with access to this browser's storage may inspect saved labels and identifiers. Account buckets prevent mixed lists in the interface, not local storage inspection.</li>
+            <li><strong>Site-data clearing:</strong> clearing the browser's site data removes shortcuts. Uninstalling the addon does not automatically erase stored data.</li>
+            <li><strong>Storage restrictions:</strong> unavailable or full storage can limit persistence. Write failures show a warning and preserve the current in-memory list; Odoo may fall back to RAM storage when localStorage is unavailable.</li>
+            <li><strong>Multiple tabs:</strong> storage-change events refresh affected lists. Simultaneous edits are last-write-wins rather than transactional merges.</li>
+            <li><strong>Permissions still apply:</strong> pins do not grant access. Deleted or inaccessible records may remain as stale shortcuts; remove them from the menu if they cannot be opened.</li>
+            <li><strong>Company context:</strong> buckets are separated by database and user, not by company. Navigation uses the current Odoo company context and access rules.</li>
+            <li><strong>Older unscoped storage:</strong> legacy arrays are not imported automatically because their database/user ownership cannot be established.</li>
+        </ul>
+    </section>
+
+    <section class="oe_container" style="background:#ffffff;border:1px solid #e5e7ef;border-radius:14px;padding:28px;">
+        <h2 style="margin-top:0;color:#4b3589;">Frequently asked questions</h2>
+        <h3 style="font-size:18px;">Why is the recent list empty?</h3>
+        <p>Open a saved record in a standard form view. Simply browsing a list, or opening a new unsaved form, does not create a history entry.</p>
+        <h3 style="font-size:18px;">Will a pinned record disappear after ten other records?</h3>
+        <p>No. The ten-entry limit applies only to recent history. Pins are maintained independently.</p>
+        <h3 style="font-size:18px;">Can I remove a record from both sections?</h3>
+        <p>Yes. Remove its pin and its recent entry separately. The backend record is untouched.</p>
+        <h3 style="font-size:18px;">Why did a removed recent entry come back?</h3>
+        <p>Opening that record again adds it to history. Removal clears the shortcut; it does not block future tracking.</p>
+        <h3 style="font-size:18px;">Does this record every kind of activity?</h3>
+        <p>No. This is a saved-form navigation aid, not an audit log. It does not record field changes, list browsing, every user action or server-side activity.</p>
+        <h3 style="font-size:18px;">Is this a permanently docked sidebar?</h3>
+        <p>No. Despite the module name, the current implementation is a navbar systray dropdown containing pinned and recent sections.</p>
+    </section>
+    <p style="text-align:center;color:#747d90;font-size:13px;margin:24px 0 0;">Quick Record Pin &amp; History Sidebar &middot; Odoo 19.0</p>
+</div>
+</body>
+</html>
