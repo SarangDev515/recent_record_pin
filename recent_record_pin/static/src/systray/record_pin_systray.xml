@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="recent_record_pin.RecordPinSystray">
+        <div class="o_record_pin_systray">
+            <Dropdown position="'bottom-end'" menuClass="'o_record_pin_menu'">
+                <button type="button" class="o_record_pin_toggle" title="Pinned and recent records" aria-label="Pinned and recent records">
+                    <i class="fa fa-thumb-tack o_record_pin_nav_icon" aria-hidden="true"/>
+                    <span t-if="state.pinned.length" class="o_record_pin_count badge rounded-pill"><t t-esc="state.pinned.length"/></span>
+                </button>
+                <t t-set-slot="content">
+                    <h6 class="o_record_pin_heading"><i class="fa fa-thumb-tack me-2" aria-hidden="true"/>Pinned Records</h6>
+                    <p t-if="!state.pinned.length" class="o_record_pin_empty">No pinned records yet. Pin a recently viewed record below.</p>
+                    <div t-foreach="state.pinned" t-as="record" t-key="recordKey(record)" class="o_record_pin_row o_record_pin_row_pinned">
+                        <DropdownItem class="'o_record_pin_link'" onSelected="() => this.openRecord(record)" attrs="{ title: record.displayName, 'aria-disabled': ui.opening }">
+                            <span class="o_record_pin_name" t-esc="record.displayName"/>
+                            <small class="o_record_pin_model" t-esc="record.resModel"/>
+                        </DropdownItem>
+                        <button type="button" class="btn o_record_pin_action o_record_pin_remove" title="Remove from pinned records" aria-label="Remove from pinned records" t-on-click.stop="() => this.removeRecord(record, 'pinned')"><i class="fa fa-trash-o" aria-hidden="true"/></button>
+                    </div>
+                    <div class="dropdown-divider"/>
+                    <h6 class="o_record_pin_heading"><i class="fa fa-history me-2" aria-hidden="true"/>Recently Viewed <span class="text-muted fw-normal">(latest 10)</span></h6>
+                    <p t-if="!state.recent.length" class="o_record_pin_empty">Open a saved record to start your history.</p>
+                    <div t-foreach="state.recent" t-as="record" t-key="recordKey(record)" class="o_record_pin_row">
+                        <DropdownItem class="'o_record_pin_link'" onSelected="() => this.openRecord(record)" attrs="{ title: record.displayName, 'aria-disabled': ui.opening }">
+                            <span class="o_record_pin_name" t-esc="record.displayName"/>
+                            <small class="o_record_pin_model" t-esc="record.resModel"/>
+                        </DropdownItem>
+                        <button type="button" class="btn o_record_pin_action" t-att-title="isPinned(record) ? 'Unpin record' : 'Pin record'" t-att-aria-label="isPinned(record) ? 'Unpin record' : 'Pin record'" t-att-aria-pressed="isPinned(record) ? 'true' : 'false'" t-on-click.stop="() => this.togglePin(record)"><i t-att-class="isPinned(record) ? 'fa fa-thumb-tack text-primary' : 'fa fa-thumb-tack text-muted'" aria-hidden="true"/></button>
+                        <button type="button" class="btn o_record_pin_action o_record_pin_remove" title="Remove from recently viewed" aria-label="Remove from recently viewed" t-on-click.stop="() => this.removeRecord(record, 'recent')"><i class="fa fa-trash-o" aria-hidden="true"/></button>
+                    </div>
+                </t>
+            </Dropdown>
+        </div>
+    </t>
+</templates>
