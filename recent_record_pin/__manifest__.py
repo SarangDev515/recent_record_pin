@@ -4,7 +4,9 @@
     "category": "Productivity",
     "summary": "Pin important records and revisit your ten most recent forms",
     "license": "LGPL-3",
+    'author': 'SARANG T',
     "depends": ["web", "mail"],
+    "images": ["static/description/recent_record_pin_demo.gif"],
     "assets": {
         "web.assets_backend": [
             "recent_record_pin/static/src/services/record_history_service.js",
